@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MixF — Кинематографические отклики</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+  <div class="page-glow"></div>
+
+  <header class="header container">
+    <a class="logo" href="#" aria-label="MixF — главная страница">
+      <span class="logo-mark">F</span>
+      <span>Mix<span>F</span></span>
+    </a>
+
+    <div class="search-wrapper">
+      <label class="visually-hidden" for="searchInput">Поиск фильма</label>
+      <input
+        id="searchInput"
+        class="search-input"
+        type="search"
+        placeholder="Найти фильм в коллекции..."
+        autocomplete="off"
+      >
+      <div id="searchDropdown" class="search-dropdown"></div>
+    </div>
+
+    <button id="openModalButton" class="button button-primary" type="button">
+      <span>+</span> Добавить фильм
+    </button>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-labelledby="heroTitle">
+      <p class="eyebrow">PERSONAL CINEMA ARCHIVE</p>
+      <h1 id="heroTitle">Твоя коллекция <span>кинооткликов</span></h1>
+      <p class="hero-description">
+        Фильмы, которые оставили след. Оценки, эмоции и личные истории — в одном месте.
+      </p>
+
+      <div class="filters" aria-label="Фильтрация по оценке">
+        <button class="filter-button active" data-rating="all" type="button">Все <span>◆</span></button>
+        <button class="filter-button" data-rating="5" type="button">5 ★ <span>Шедевры</span></button>
+        <button class="filter-button" data-rating="4" type="button">4 ★</button>
+        <button class="filter-button" data-rating="3" type="button">3 ★</button>
+        <button class="filter-button" data-rating="2" type="button">2 ★</button>
+        <button class="filter-button" data-rating="1" type="button">1 ★</button>
+      </div>
+    </section>
+
+    <section class="collection-section" aria-labelledby="collectionTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MY VAULT</p>
+          <h2 id="collectionTitle">Коллекция фильмов</h2>
+        </div>
+        <p id="moviesCounter" class="movies-counter"></p>
+      </div>
+
+      <div id="moviesGrid" class="movies-grid"></div>
+
+      <div id="emptyState" class="empty-state hidden">
+        <div class="empty-icon">◈</div>
+        <h3>Фильмы не найдены</h3>
+        <p>Попробуйте изменить запрос или выбрать другой фильтр.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="movieModal" class="modal" aria-hidden="true">
+    <div class="modal-overlay" data-close-modal></div>
+
+    <section class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Закрыть окно" data-close-modal>×</button>
+
+      <p class="eyebrow">NEW ENTRY</p>
+      <h2 id="modalTitle">Добавить в коллекцию</h2>
+      <p class="modal-description">Сохраните фильм и своё впечатление о нём.</p>
+
+      <form id="movieForm">
+        <div class="form-group">
+          <label for="movieTitle">Название фильма</label>
+          <input id="movieTitle" name="title" type="text" placeholder="Например, Бегущий по лезвию 2049" required>
+        </div>
+
+        <div class="form-group">
+          <label for="movieYear">Год выхода</label>
+          <input id="movieYear" name="year" type="number" min="1888" max="2100" placeholder="2026" required>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label">Ваша оценка</span>
+          <div id="ratingPicker" class="rating-picker" role="radiogroup" aria-label="Выберите оценку">
+            <button class="picker-star" type="button" data-value="1" aria-label="1 звезда">★</button>
+            <button class="picker-star" type="button" data-value="2" aria-label="2 звезды">★</button>
+            <button class="picker-star" type="button" data-value="3" aria-label="3 звезды">★</button>
+            <button class="picker-star" type="button" data-value="4" aria-label="4 звезды">★</button>
+            <button class="picker-star" type="button" data-value="5" aria-label="5 звёзд">★</button>
+          </div>
+          <input id="movieRating" name="rating" type="hidden" value="0" required>
+        </div>
+
+        <div class="form-group">
+          <label for="movieReview">Ваш отклик</label>
+          <textarea id="movieReview" name="review" rows="5" placeholder="Какие эмоции оставил этот фильм?" required></textarea>
+        </div>
+
+        <button class="button button-primary button-save" type="submit">
+          Сохранить в коллекцию <span>→</span>
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <script src="../static/js/main.js"></script>
+</body>
+</html>
